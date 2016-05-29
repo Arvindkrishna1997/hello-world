@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Bar graph</title>
+<style>
+#gra{
+	border-left:1px solid black;
+}
+#bottom{
+	border-top:1px solid black;
+}
+#sorti{
+	float:right;
+}
+</style>
+</head>
+
+<body>
+<button id="but" onclick="enter()">ClickHere</button>
+<button id="sorti" onclick="sorting()">Sort</button>
+<br/><br/>
+<div id="gra">
+</div>
+<div id="bottom"></div>
+<script>
+function enter()
+{
+var v =	prompt("enter the bar-value");
+var d = document.createElement('div');
+var foot=document.getElementById("bottom");
+d.style.display="inline-block";
+var parent=document.getElementById("gra");
+parent.appendChild(d);
+d.className='arv';
+d.style.height=v+"px";
+d.style.marginLeft="10px";
+d.style.width='20px';
+ d.style.backgroundColor="rgb(" + Math.round(Math.random()*255)+","+Math.round(Math.random()*255)+","+Math.round(Math.random()*255)+")";
+ var val=document.createElement('div');
+ val.innerHTML=v;
+ val.style.width='20px';
+ val.textAlign="center";
+ val.style.marginLeft="10px";
+ val.style.display="inline-block";
+ 
+ foot.appendChild(val);
+}
+function sorting()
+{  
+	var toSort = document.getElementById('gra').children;
+    toSort = Array.prototype.slice.call(toSort, 0);
+ 
+   
+	for(var x=toSort.length-2; x>=0; x--)
+
+	{
+
+		for(var y=0; y<=x; y++)
+
+		{
+
+			if(toSort[y].style.height>toSort[y+1].style.height)
+
+			{
+
+				var temp = toSort[y+1];
+
+
+				toSort[y+1] = toSort[y];
+
+				toSort[y] = temp;
+
+			}
+
+		}
+
+	}
+ var parent = document.getElementById('gra');
+parent.innerHTML = "";
+
+for(var i = 0, l = toSort.length; i < l; i++) {
+    parent.appendChild(toSort[i]);
+}
+var toSort = document.getElementById('bottom').children;
+toSort = Array.prototype.slice.call(toSort, 0);
+for(var x=0; x<toSort.length-1; x++)
+
+	{
+
+		for(var y=0; y<toSort.length-x-1; y++)
+
+		{
+
+			if(toSort[y].innerHTML>toSort[y+1].innerHTML)
+
+			{
+				var temp = toSort[y+1];
+
+
+				toSort[y+1] = toSort[y];
+
+				toSort[y] = temp;
+
+			}
+
+		}
+
+	}
+	var parent = document.getElementById('bottom');
+parent.innerHTML = "";
+
+for(var i = 0, l = toSort.length; i < l; i++) {
+    parent.appendChild(toSort[i]);
+}
+
+}
+
+</script>
+</body>
+</html>
